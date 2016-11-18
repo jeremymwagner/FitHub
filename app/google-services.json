@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "630386468227",
+    "project_id": "fithub-41669"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630386468227:android:d38d4854936f8e2d",
+        "android_client_info": {
+          "package_name": "me.jeremy.fithub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630386468227-7ueba45slks7gu8oc6nv7pm97lvth7ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.jeremy.fithub",
+            "certificate_hash": "AF8F7AC77D7F3F8312C2F072AB177FB7B91CF3B4"
+          }
+        },
+        {
+          "client_id": "630386468227-a7o6ji9d6v1o93jc17hcu7jh82nnbh1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq7o22eEFoCKmnfBFMzxSJmxHJ4Yem_-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

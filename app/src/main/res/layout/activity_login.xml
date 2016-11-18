@@ -52,11 +52,11 @@
         android:layout_alignEnd="@+id/login_email"/>
 
 
-    <!-- Facebook sign in button for use of Facebook API-->
+    <!-- Google sign in button for use of Google API-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fb"
+        android:text="LOGIN WITH GOOGLE"
         android:background="@color/fb_button"
         android:textColor="#FFFFFF"
         android:layout_marginTop="15dp"
