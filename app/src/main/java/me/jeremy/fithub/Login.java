@@ -53,6 +53,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mStatusTextView = (TextView) findViewById(R.id.name);
+
         init();
 
         // Button listeners
@@ -120,19 +123,23 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-            GoogleSignInAccount acct = result.getSignInAccount();
-            TextView name = (TextView) findViewById(R.id.name);
-            //name.setText(acct.getDisplayName());
+            //GoogleSignInAccount acct = result.getSignInAccount();
+            //TextView name = (TextView) findViewById(R.id.name);
+            //String personName = acct.getDisplayName();
+            //name.setText(personName);
         }
     }
     // [END onActivityResult]
 
     private static final String TAG = "SignInActivity";
+    private TextView mStatusTextView;
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         //if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             Intent myIntent = new Intent(Login.this, profile.class);
             startActivity(myIntent);
             //updateUI(true);

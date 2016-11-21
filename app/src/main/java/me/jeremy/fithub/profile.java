@@ -40,7 +40,8 @@ public class profile extends AppCompatActivity {
             handleSignInResult(result);
             GoogleSignInAccount acct = result.getSignInAccount();
             TextView name = (TextView) findViewById(R.id.name);
-            name.setText(acct.getDisplayName());
+            String personName = acct.getDisplayName();
+            name.setText(personName); //Grab the name of the user
         }
     }
 
@@ -49,9 +50,6 @@ public class profile extends AppCompatActivity {
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        //updateUI(false);
-                        // [END_EXCLUDE]
                     }
                 });
     }

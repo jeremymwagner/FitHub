@@ -11,12 +11,24 @@
     android:background="#3f86b0">
 
     <TextView
+        android:text="Fithub Profile\n"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="42sp"
+    android:id="@+id/fithub"/>
+
+    <TextView
         android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textSize="32sp"
-        android:id="@+id/name"
-        android:layout_weight="0.15"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/name"/>
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/email"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
