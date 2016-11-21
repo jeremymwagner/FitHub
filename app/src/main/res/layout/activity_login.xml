@@ -52,7 +52,7 @@
         android:layout_alignEnd="@+id/login_email"/>
 
 
-    <!-- Google sign in button for use of Google API-->
+    <!-- Google sign in button for use of Google API
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,21 +67,10 @@
         android:layout_alignStart="@+id/login_email"
         android:layout_alignRight="@+id/login_email"
         android:layout_alignEnd="@+id/login_email"/>
+    -->
 
 
     <!-- Sign up button to register new account-->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signup"
-        android:textSize="15dp"
-        android:id="@+id/login_signup"
-        android:layout_below="@+id/login_button"
-        android:layout_marginTop="15dp"
-        android:layout_alignLeft="@+id/fb_button"
-        android:layout_alignStart="@+id/fb_button"
-        android:layout_alignRight="@+id/fb_button"
-        android:layout_alignEnd="@+id/fb_button" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,7 +80,7 @@
         android:text="OR"
         android:textStyle="bold"
         android:id="@+id/login_or"
-        android:layout_below="@id/login_signup"
+        android:layout_below="@+id/login_signup"
     />
 
 
@@ -101,8 +90,27 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="FitHub"
+        android:textSize="42sp"
         android:id="@+id/login_title"
     
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:textSize="15dp"
+        android:id="@+id/login_signup"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true" />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in_button"
+        android:layout_below="@+id/login_or"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>
