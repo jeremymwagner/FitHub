@@ -1,12 +1,14 @@
 package me.jeremy.fithub;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
 import android.app.ProgressDialog;
@@ -22,6 +24,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+
+import static me.jeremy.fithub.R.id.imageView;
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -123,10 +127,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-            //GoogleSignInAccount acct = result.getSignInAccount();
-            //TextView name = (TextView) findViewById(R.id.name);
-            //String personName = acct.getDisplayName();
-            //name.setText(personName);
+            GoogleSignInAccount acct = result.getSignInAccount();
+            setContentView(R.layout.activity_profile);
+            TextView name = (TextView) findViewById(R.id.name);
+            TextView email = (TextView) findViewById(R.id.email);
+            ImageView pic = (ImageView) findViewById(R.id.imgProfilePic);
+            String personName = acct.getDisplayName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+            name.setText(personName);
+            email.setText(personEmail);
+            pic.setImageURI(personPhoto);
         }
     }
     // [END onActivityResult]
@@ -141,7 +153,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             GoogleSignInAccount acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             Intent myIntent = new Intent(Login.this, profile.class);
-            startActivity(myIntent);
+            //startActivity(myIntent);
             //updateUI(true);
         //} else {
             // Signed out, show unauthenticated UI.

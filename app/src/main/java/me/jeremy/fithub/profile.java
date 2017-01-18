@@ -19,7 +19,21 @@ public class profile extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
-
+    //private Person currentPerson;
+    private String personName;
+    private String personPhoto;
+    private String personGooglePlusProfile;
+/*
+    @Override
+    public void onConnected() {
+        if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+            currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+            personName = currentPerson.getDisplayName();
+            personPhoto = currentPerson.getImage();
+            personGooglePlusProfile = currentPerson.getUrl();
+        }
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,28 +42,28 @@ public class profile extends AppCompatActivity {
         Button signOut = (Button) findViewById(R.id.sign_out_button);
         signOut.setVisibility(Button.VISIBLE);
         findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-    }
 
+    }
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-            GoogleSignInAccount acct = result.getSignInAccount();
-            TextView name = (TextView) findViewById(R.id.name);
-            String personName = acct.getDisplayName();
-            name.setText(personName); //Grab the name of the user
-        }
-    }
+        GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        handleSignInResult(result);
+        GoogleSignInAccount acct = result.getSignInAccount();
+        TextView name = (TextView) findViewById(R.id.name);
+        String personName = acct.getDisplayName();
+        name.setText(personName); //Grab the name of the user
 
+    }
+*/
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
+
                     }
                 });
     }
