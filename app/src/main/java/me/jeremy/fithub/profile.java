@@ -41,23 +41,19 @@ public class profile extends AppCompatActivity {
 
         Button signOut = (Button) findViewById(R.id.sign_out_button);
         signOut.setVisibility(Button.VISIBLE);
-        findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-
     }
-/*
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-        handleSignInResult(result);
-        GoogleSignInAccount acct = result.getSignInAccount();
-        TextView name = (TextView) findViewById(R.id.name);
-        String personName = acct.getDisplayName();
-        name.setText(personName); //Grab the name of the user
-
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
     }
-*/
+
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -74,16 +70,6 @@ public class profile extends AppCompatActivity {
                 signOut();
                 break;
         }
-    }
-
-    private void revokeAccess() {
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // ...
-                    }
-                });
     }
 
     private static final String TAG = "SignInActivity";

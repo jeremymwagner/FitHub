@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.util.Log;
 import android.app.ProgressDialog;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInApi;
@@ -33,6 +35,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     public Button register;
     public EditText email,password;
     private static final int RC_SIGN_IN = 9001;
+    private ImageView imgProfilePic;
 
     /**
      * Method to handle all button events on Login page
@@ -52,6 +55,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private SignInButton login;
     private GoogleApiClient googleApiClient;
     private static final int REQUEST_CODE = 100;
+    Button signOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +92,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 .build();
 
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
     }
 /*
     @Override
@@ -131,16 +133,28 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             setContentView(R.layout.activity_profile);
             TextView name = (TextView) findViewById(R.id.name);
             TextView email = (TextView) findViewById(R.id.email);
-            ImageView pic = (ImageView) findViewById(R.id.imgProfilePic);
+            //ImageView pic = (ImageView) findViewById(R.id.imgProfilePic);
+            imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
             String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
             String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
+            //Uri personPhoto = acct.getPhotoUrl();
+            String personPhoto = acct.getPhotoUrl().toString();
             name.setText(personName);
             email.setText(personEmail);
-            pic.setImageURI(personPhoto);
+            //pic.setImageURI(personPhoto);
+            Glide.with(getApplicationContext()).load(personPhoto)
+                    .thumbnail(1.0f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgProfilePic);
+
+            signOut = (Button) findViewById(R.id.sign_out_button);
+            signOut.setOnClickListener(this);
         }
     }
+
+
     // [END onActivityResult]
 
     private static final String TAG = "SignInActivity";
@@ -183,11 +197,26 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        Intent toLogin = new Intent(Login.this,Login.class);
+                        startActivity(toLogin);
+                    }
+                });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
+                break;
+
+            case R.id.sign_out_button:
+                signOut();
                 break;
         }
     }
@@ -209,4 +238,5 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             mProgressDialog.hide();
         }
     }
+
 }
