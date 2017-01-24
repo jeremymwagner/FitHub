@@ -139,15 +139,33 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             String personEmail = acct.getEmail();
             String personId = acct.getId();
             //Uri personPhoto = acct.getPhotoUrl();
-            String personPhoto = acct.getPhotoUrl().toString();
             name.setText(personName);
             email.setText(personEmail);
             //pic.setImageURI(personPhoto);
+            /*String personPhoto = acct.getPhotoUrl().toString();
+
             Glide.with(getApplicationContext()).load(personPhoto)
                     .thumbnail(1.0f)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgProfilePic);
+                    */
+            String tempProfilePic = "https://www.glameve.com/media/testimonials/pictures/resized/100_100_empty.gif";
+            try {
+                String personPhoto = acct.getPhotoUrl().toString();
+                Glide.with(getApplicationContext()).load(personPhoto)
+                        .thumbnail(1.0f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfilePic);
+            }
+            catch(Exception e){
+                Glide.with(getApplicationContext()).load(tempProfilePic)
+                        .thumbnail(1.0f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfilePic);
+            }
 
             signOut = (Button) findViewById(R.id.sign_out_button);
             signOut.setOnClickListener(this);
