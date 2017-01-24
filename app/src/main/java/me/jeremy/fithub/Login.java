@@ -36,21 +36,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     public EditText email,password;
     private static final int RC_SIGN_IN = 9001;
     private ImageView imgProfilePic;
-
-    /**
-     * Method to handle all button events on Login page
-     */
-    void init(){
-        register = (Button) findViewById(R.id.login_signup);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toRegister = new Intent(Login.this,Register.class);
-                startActivity(toRegister);
-            }
-        });
-    }
-
+    private ImageView tempLogo;
 
     private SignInButton login;
     private GoogleApiClient googleApiClient;
@@ -62,9 +48,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mStatusTextView = (TextView) findViewById(R.id.name);
+        tempLogo = (ImageView) findViewById(R.id.tempLogo);
+        String logoURL = "http://15minutesmore.com/blog/wp-content/uploads/2014/03/687474703a2f2f61313238302e70686f626f732e6170706c652e636f6d2f75732f72313030302f3130342f507572706c652f76342f65362f65352f39332f65366535393330642d666535332d646265652d316630392d3533393737626364636537322f6d7a6c2e696d6b64637272702e706e67.png";
+        Glide.with(getApplicationContext()).load(logoURL)
+                .thumbnail(1.0f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(tempLogo);
 
-        init();
+        mStatusTextView = (TextView) findViewById(R.id.name);
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);

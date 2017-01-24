@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
     android:background="#3f86b0"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:text="Fithub Profile"
@@ -19,45 +20,64 @@
         android:layout_height="2dp"
         android:background="@android:color/black"/>
 
-    <ImageView
-        android:id="@+id/imgProfilePic"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_weight="0.00" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="329dp"
+        android:padding="@dimen/activity_vertical_margin"
+        android:background="#3f86b0"
+        android:orientation="horizontal"
+        android:layout_weight="0.97">
 
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/space1"/>
+        <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:id="@+id/space4"/>
 
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/name"/>
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/space2"/>
+        <ImageView
+            android:id="@+id/imgProfilePic"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_weight="0.00" />
 
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/email"/>
+        <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:id="@+id/space3"/>
 
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/space3"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="208dp"
+            android:padding="@dimen/activity_vertical_margin"
+            android:background="#3f86b0"
+            android:orientation="vertical">
+
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/name"/>
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/space2"/>
+
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/email"/>
+            </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:text="Sign Out"
