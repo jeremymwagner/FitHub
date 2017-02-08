@@ -176,8 +176,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            Intent myIntent = new Intent(Login.this, profile.class);
-            //startActivity(myIntent);
+            Intent myIntent = new Intent(Login.this, Calendar.class);
+            startActivity(myIntent);
             //updateUI(true);
         //} else {
             // Signed out, show unauthenticated UI.

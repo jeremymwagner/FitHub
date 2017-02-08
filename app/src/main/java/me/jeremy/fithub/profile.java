@@ -78,7 +78,7 @@ public class profile extends AppCompatActivity {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         //if (result.isSuccess()) {
         // Signed in successfully, show authenticated UI.
-        Intent myIntent = new Intent(profile.this, Login.class);
+        Intent myIntent = new Intent(profile.this, Calendar.class);
         startActivity(myIntent);
     }
 }
