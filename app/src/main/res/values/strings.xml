@@ -13,4 +13,48 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string-array name="exercise">
+        <item>Bench Press</item>
+        <item>Squats</item>
+        <item>Curls</item>
+        <item>Leg Press</item>
+        <item>Deadlift</item>
+        <item>Leg Curl</item>
+        <item>Hang Clean</item>
+        <item>Snatch</item>
+        <item>Lunge</item>
+        <item>Pull-Up</item>
+        <item>Crunch</item>
+        <item>Shoulder Press</item>
+        <item>Lateral Raise</item>
+        <item>Dips</item>
+        <item>Leg Raise</item>
+        <item>Push Up</item>
+    </string-array>
+
+    <string-array name="num">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+
+    </string-array>
+
 </resources>
