@@ -8,14 +8,20 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
-import java.net.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.IOException;
 import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
+
 import android.util.Log;
+import android.os.AsyncTask;
+
+import me.jeremy.fithub.TalkToServer;
+
 
 import org.json.JSONObject;
 
@@ -24,7 +30,10 @@ public class Calendar extends AppCompatActivity {
     CalendarView calendar;
 
     String baseURL = "https://people.eecs.ku.edu/~kmonagha/test2.php";
-
+    String myResult = "";
+    TalkToServer getRequest = new TalkToServer();
+    String s = formURL(0117,"Calendar");
+    //getRequest.execute(s);
     public String formURL(int startDate, String requestType){
         //hard code googleid until figure out how to grab it from sign o
            return baseURL + "?requestType="+requestType+"&startDate=0117&googleId=109689297173623922729";
@@ -34,13 +43,15 @@ public class Calendar extends AppCompatActivity {
 
     public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
 
+        Log.d("test",urlString);
 
         URL url = new URL(urlString);
-        Log.d("test",urlString);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
+        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 
         urlConnection.setRequestMethod("GET");
-        int responseCode = urlConnection.getResponseCode();
+//        int responseCode = urlConnection.getResponseCode();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
@@ -58,6 +69,8 @@ public class Calendar extends AppCompatActivity {
         jsonString = sb.toString();
 
         System.out.println("JSON: " + jsonString);
+        Log.d("test",urlString);
+
 
         return new JSONObject((jsonString));
     }
@@ -82,8 +95,15 @@ public class Calendar extends AppCompatActivity {
 
                 String str = "test";
 
+                try {
+                    str = new TalkToServer().execute(s).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
                 //Print workouts and whatever is needed below the printed date
-                try{
+                /*try{
                     str = getJSONObjectFromURL(formURL(0117, "Calendar")).toString();
                 }catch (IOException e) {
                     e.printStackTrace();
@@ -91,7 +111,7 @@ public class Calendar extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("ErrorJSON: ", e.toString());
-                }
+                }*/
 
                 TextView workoutInfo = (TextView) findViewById(R.id.workout);
                 workoutInfo.setText(str);
