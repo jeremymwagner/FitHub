@@ -16,6 +16,10 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
+import android.util.JsonReader;
+import java.io.InputStream;
+
+
 
 import android.util.Log;
 import android.os.AsyncTask;
@@ -97,11 +101,43 @@ public class Calendar extends AppCompatActivity {
 
                 try {
                     str = new TalkToServer().execute(s).get();
+                    JSONObject jobj = new JSONObject(str);
+
+                    JSONObject w1 = jobj.getJSONObject("1");
+                    JSONObject e1 = w1.getJSONObject("1");
+                    String s1 = e1.getString("W_SETS");
+                    String r1 = e1.getString("W_REPS");
+                    String a1 = e1.getString("W_AUTHOR");
+                    JSONObject e2 = w1.getJSONObject("2");
+                    String s2 = e1.getString("W_SETS");
+                    String r2 = e1.getString("W_REPS");
+
+                    TextView workoutName = (TextView) findViewById(R.id.workout);
+                    workoutName.setText(a1+"'s workout ");
+
+                    TextView exer1 = (TextView) findViewById(R.id.exer_1);
+                    exer1.setText("Exercise: 1");
+
+                    TextView set1 = (TextView) findViewById(R.id.sets_1);
+                    set1.setText(s1);
+
+                    TextView rep1 = (TextView) findViewById(R.id.reps_1);
+                    workoutName.setText(r1);
+
+
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
+                } catch(JSONException e){
+                    e.printStackTrace();
                 }
+
+
+
+
+
                 //Print workouts and whatever is needed below the printed date
                 /*try{
                     str = getJSONObjectFromURL(formURL(0117, "Calendar")).toString();
