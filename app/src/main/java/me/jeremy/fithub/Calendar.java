@@ -33,7 +33,7 @@ public class Calendar extends AppCompatActivity {
 
     CalendarView calendar;
 
-    String baseURL = "https://people.eecs.ku.edu/~kmonagha/test2.php";
+    String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
     String myResult = "";
     TalkToServer getRequest = new TalkToServer();
     String s = formURL(0117,"Calendar");
@@ -95,7 +95,7 @@ public class Calendar extends AppCompatActivity {
 
                 //Prints out the date selected below the calendar
                 TextView textElement = (TextView) findViewById(R.id.date);
-                textElement.setText(month + "/" + dayOfMonth + "/" + year);
+                textElement.setText((month + 1) + "/" + dayOfMonth + "/" + year);
 
                 String str = "test";
 
@@ -125,7 +125,6 @@ public class Calendar extends AppCompatActivity {
                     workoutName.setText(r1);
 
 
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -149,8 +148,8 @@ public class Calendar extends AppCompatActivity {
                     Log.d("ErrorJSON: ", e.toString());
                 }*/
 
-                TextView workoutInfo = (TextView) findViewById(R.id.workout);
-                workoutInfo.setText(str);
+                //TextView workoutInfo = (TextView) findViewById(R.id.workout);
+                //workoutInfo.setText(str);
                 Log.d("JSON test", str);
                 //Button that will redirect user to create a workout for the date if no workout is posted
                 //Button that will give an option to delete the workout => confirm notification
