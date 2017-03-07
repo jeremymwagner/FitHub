@@ -38,6 +38,13 @@ public class Calendar extends AppCompatActivity {
     TalkToServer getRequest = new TalkToServer();
     String s = formURL(0117,"Calendar");
     //getRequest.execute(s);
+
+    /**
+     *  Form url queries by grabbing startdate from selected calendar day
+     * @param startDate
+     * @param requestType
+     * @return
+     */
     public String formURL(int startDate, String requestType){
         //hard code googleid until figure out how to grab it from sign o
            return baseURL + "?requestType="+requestType+"&startDate=0117&googleId=109689297173623922729";
@@ -45,39 +52,7 @@ public class Calendar extends AppCompatActivity {
     }
 
 
-    public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
 
-        Log.d("test",urlString);
-
-        URL url = new URL(urlString);
-
-
-        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-
-        urlConnection.setRequestMethod("GET");
-//        int responseCode = urlConnection.getResponseCode();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-        char[] buffer = new char[1024];
-
-        String jsonString = new String();
-
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line + "\n");
-        }
-        br.close();
-
-        jsonString = sb.toString();
-
-        System.out.println("JSON: " + jsonString);
-        Log.d("test",urlString);
-
-
-        return new JSONObject((jsonString));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +75,8 @@ public class Calendar extends AppCompatActivity {
                 String str = "test";
 
                 try {
+
+                    // Add date to param string
                     str = new TalkToServer().execute(s).get();
                     JSONObject jobj = new JSONObject(str);
 

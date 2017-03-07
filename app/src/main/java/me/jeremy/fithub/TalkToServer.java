@@ -44,6 +44,8 @@ public class TalkToServer extends AsyncTask<String,Void,String> {
         String result;
         String inputLine;
         try {
+
+
             URL myURL = new URL(stringUrl);
 
             HttpURLConnection conn = (HttpURLConnection) myURL.openConnection();
