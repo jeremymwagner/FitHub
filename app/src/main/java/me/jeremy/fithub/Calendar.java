@@ -140,9 +140,12 @@ public class Calendar extends AppCompatActivity {
                 //else if(there is a workout)
                 //button to add workout or delete workout
 
+                //
+                // CHANGE BACK TO CREATE WORKOUT
+                //
                 createNew.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(Calendar.this, createWorkout.class);
+                        Intent i = new Intent(Calendar.this, Search.class);
                         startActivity(i);
                     }
             });

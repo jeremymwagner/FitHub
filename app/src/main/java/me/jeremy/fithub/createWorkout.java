@@ -62,5 +62,7 @@ public class createWorkout extends AppCompatActivity {
         spinner11.setAdapter(adapter2);
         spinner15 = (Spinner)findViewById(R.id.sets5);
         spinner15.setAdapter(adapter3);
+
+
     }
 }
