@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#3f86b0"
     tools:context=".Calendar"
     android:weightSum="1">
 
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/workout"
         android:textSize="24sp"
-        android:layout_weight="0.22" />
+        android:layout_weight="0.12" />
 
     <TextView
         android:layout_width="match_parent"
@@ -39,7 +40,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sets_1" />
+        android:id="@+id/exer_2" />
 
     <TextView
         android:layout_width="match_parent"

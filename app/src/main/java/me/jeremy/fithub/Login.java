@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // Set the dimensions of the sign-in button.
+
     }
 /*
     @Override
@@ -176,8 +176,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            Intent myIntent = new Intent(Login.this, Calendar.class);
-            startActivity(myIntent);
+
+            //Intent myIntent3 = new Intent(Login.this, Search.class); //Calendar.class  //Delete
+            //startActivity(myIntent3);    //Delete
+
             //updateUI(true);
         //} else {
             // Signed out, show unauthenticated UI.
@@ -227,6 +229,16 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             case R.id.sign_out_button:
                 signOut();
+                break;
+
+            case R.id.calendarButton:
+                Intent myIntent1 = new Intent(Login.this, Calendar.class);
+                startActivity(myIntent1);
+                break;
+
+            case R.id.searchButton:
+                Intent myIntent2 = new Intent(Login.this, Search.class);
+                startActivity(myIntent2);
                 break;
         }
     }

@@ -90,17 +90,13 @@ public class Calendar extends AppCompatActivity {
                     String r2 = e1.getString("W_REPS");
 
                     TextView workoutName = (TextView) findViewById(R.id.workout);
-                    workoutName.setText(a1+"'s workout ");
+                    workoutName.setText(a1);
 
                     TextView exer1 = (TextView) findViewById(R.id.exer_1);
-                    exer1.setText("Exercise: 1");
+                    exer1.setText("Exercise: Pull-Ups" + "      Sets: " + s1 + "    Reps: " + r1);
 
-                    TextView set1 = (TextView) findViewById(R.id.sets_1);
-                    set1.setText(s1);
-
-                    TextView rep1 = (TextView) findViewById(R.id.reps_1);
-                    workoutName.setText(r1);
-
+                    TextView exer2 = (TextView) findViewById(R.id.exer_2);
+                    exer2.setText("\nExercise: Curls" + "      Sets: " + s2 + "    Reps: " + r2);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -145,7 +141,7 @@ public class Calendar extends AppCompatActivity {
                 //
                 createNew.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(Calendar.this, Search.class);
+                        Intent i = new Intent(Calendar.this, createWorkout.class);
                         startActivity(i);
                     }
             });

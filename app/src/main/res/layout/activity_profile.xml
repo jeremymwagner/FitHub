@@ -20,14 +20,13 @@
         android:layout_height="2dp"
         android:background="@android:color/black"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="329dp"
         android:padding="@dimen/activity_vertical_margin"
         android:background="#3f86b0"
         android:orientation="horizontal"
-        android:layout_weight="0.97">
+        android:layout_weight="1.00">
 
         <TextView
             android:text=""
@@ -80,8 +79,23 @@
     </LinearLayout>
 
     <Button
+        android:text="Calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:id="@+id/calendarButton" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:id="@+id/searchButton" />
+
+    <Button
         android:text="Sign Out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:id="@+id/sign_out_button" />
 </LinearLayout>

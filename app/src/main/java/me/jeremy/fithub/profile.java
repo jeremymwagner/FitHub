@@ -41,6 +41,15 @@ public class profile extends AppCompatActivity {
 
         Button signOut = (Button) findViewById(R.id.sign_out_button);
         signOut.setVisibility(Button.VISIBLE);
+
+        Button calendarButton = (Button) findViewById(R.id.calendarButton);
+        calendarButton.setVisibility(Button.VISIBLE);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(profile.this, Calendar.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -59,9 +68,12 @@ public class profile extends AppCompatActivity {
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-
                     }
                 });
+    }
+
+    private void calendarButton() {
+        startActivity(new Intent(profile.this, Calendar.class));
     }
 
     public void onClick(View v) {
