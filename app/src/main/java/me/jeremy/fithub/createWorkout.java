@@ -10,12 +10,31 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
+import java.util.List;
+
+
 
 public class createWorkout extends AppCompatActivity {
 
     Spinner spinner1, spinner2, spinner3, spinner4, spinner5, spinner6, spinner7, spinner8, spinner9, spinner10, spinner11, spinner12, spinner13, spinner14, spinner15;
     ArrayAdapter<CharSequence> adapter1, adapter2, adapter3;
 
+    public int w_ID = 5;
+    String str_w_ID = String.format("%06d", w_ID);
+
+    String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
+    String myResult = "";
+    TalkToServer getRequest = new TalkToServer();
+    String s = formURL("000005","Search","LEG PRESS","9","3","Joe Schmoe");
+    List<Exercise> postExer;
+
+    public String formURL(String wID, String requestType,String eName,String nReps,String nSets,String wAuthor){
+
+        return baseURL + "?requestType="+requestType+"&workoutID="+wID +"&exerciseName="
+                + eName+"&W_REPS="+nReps+"&W_SETS="+nSets+"&W_AUTHOR"+wAuthor+"&GOOGLE_ID=333";
+
+    }
+    // https://people.eecs.ku.edu/~jbondoc/test2.php?requestType=Post&workoutID=000005&exerciseName1=LEG_PRESS&W_REPS1=9&W_SETS1=3&W_AUTHOR=Joe_Schmoe&googleID=333
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

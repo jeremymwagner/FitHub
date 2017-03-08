@@ -6,6 +6,7 @@ import android.util.Log;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +40,8 @@ public class Search extends AppCompatActivity {
             // Add date to param string
             str = new TalkToServer().execute(s).get();
             JSONObject jobj = new JSONObject(str);
+
+            JSONArray res = new JSONArray(jobj);
 
 
             TextView testReq = (TextView) findViewById(R.id.test);
