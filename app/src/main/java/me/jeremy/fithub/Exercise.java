@@ -19,20 +19,32 @@ public class Exercise {
         this.reps = r;
     }
 
-    public void incSets(){
-        this.sets++;
+    public int getSets(){
+        return this.sets;
     }
 
-    public void decSets(){
-        this.sets--;
+    public void setSets(int sets){
+        this.sets = sets;
     }
 
-    public void incReps(){
-        this.reps++;
+    public int getReps(){
+        return this.reps;
     }
 
-    public void decReps(){
-        this.reps--;
+    public void setReps(int reps){
+        this.reps = reps;
     }
+
+    public String getDescription(){ return this.description}
+
+    public void setDescription(String d){ this.description = d;}
+
+    public String getName(){return this.name;}
+
+    public void setName(String n){this.name = n;}
+
+    public String getMuscleGroup(){return this.muscleGroup;}
+
+    public void setMuscleGroup(String m){ this.muscleGroup = m;}
 
 }
