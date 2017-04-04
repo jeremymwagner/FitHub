@@ -29,7 +29,8 @@
             android:name=".main"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Search"></activity>
+        <activity android:name=".Search" />
+        <activity android:name=".FriendActivity"></activity>
     </application>
 
 </manifest>

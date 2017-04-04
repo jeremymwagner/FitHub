@@ -22,10 +22,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+
+import java.util.ArrayList;
 
 import static me.jeremy.fithub.R.id.imageView;
 
@@ -130,6 +133,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
             String personId = acct.getId();
+
             //Uri personPhoto = acct.getPhotoUrl();
             name.setText(personName);
             email.setText(personEmail);
@@ -218,6 +222,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         startActivity(toLogin);
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @Override

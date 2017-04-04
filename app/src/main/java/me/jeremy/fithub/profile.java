@@ -72,6 +72,10 @@ public class profile extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void calendarButton() {
         startActivity(new Intent(profile.this, Calendar.class));
     }

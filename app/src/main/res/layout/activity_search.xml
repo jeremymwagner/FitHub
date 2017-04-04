@@ -16,27 +16,42 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:weightSum="1">
+        android:weightSum="1"
+        tools:context="me.jeremy.fithub">
 
         <TextView
             android:text="Search\n"
             android:textSize="42sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
             android:id="@+id/searchTitle" />
 
-        <TextView
-            android:text=""
-            android:textSize="42sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/search" />
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/txtsearch"-->
+            <!--android:hint="Search"/>-->
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/searchSpinner"
+                android:layout_width="489dp"
+                android:layout_height="43dp" />
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/searchList"
             android:layout_width="match_parent"
-            android:layout_height="708dp" />
-
+            android:layout_height="727dp" />
     </LinearLayout>
 </ScrollView>

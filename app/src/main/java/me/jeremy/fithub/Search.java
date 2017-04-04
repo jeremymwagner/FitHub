@@ -2,9 +2,18 @@ package me.jeremy.fithub;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.os.AsyncTask;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,6 +32,9 @@ import me.jeremy.fithub.TalkToServer;
 
 public class Search extends AppCompatActivity {
 
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter1;
+
     String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
     String myResult = "";
     TalkToServer getRequest = new TalkToServer();
@@ -36,12 +48,33 @@ public class Search extends AppCompatActivity {
     }
 
     ArrayAdapter<String> adapter;
+    ListView lv;
+    EditText et;
+    ArrayList<String> arrayExercise;
+    String[] items;
+    String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         String str = "test";
+
+        spinner = (Spinner)findViewById(R.id.searchSpinner);
+        adapter1 = ArrayAdapter.createFromResource(this, R.array.search, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter1);
+
+        text = spinner.getSelectedItem().toString();
+
+        Button submit = (Button) findViewById(R.id.searchButton);
+        submit.setVisibility(Button.VISIBLE);
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                text = spinner.getSelectedItem().toString();
+                initList();
+            }
+        });
 
         try {
             // Add date to param string
@@ -59,9 +92,9 @@ public class Search extends AppCompatActivity {
 
             //TextView testReq = (TextView) findViewById(R.id.test);
 
-            TextView testReq = (TextView) findViewById(R.id.search);
+            //TextView testReq = (TextView) findViewById(R.id.search);
 
-            testReq.setText(str);
+            //testReq.setText(str);
 
 
 
@@ -73,20 +106,108 @@ public class Search extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ListView lv = (ListView)findViewById(R.id.searchList);
-        ArrayList<String> arrayExercise = new ArrayList<>();
-        arrayExercise.addAll(Arrays.asList(getResources().getStringArray(R.array.exercise)));
+        lv = (ListView)findViewById(R.id.searchList);
+        //et = (EditText)findViewById(R.id.txtsearch);
 
-        adapter = new ArrayAdapter<>(
-                Search.this,
-                android.R.layout.simple_list_item_1,
-                arrayExercise);
+        initList();
+//        et.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                if(charSequence.toString().equals("")) {
+//                    //reset listview
+//                    initList();
+//                }
+//                else {
+//                    //perform search
+//                    searchItem(charSequence.toString());
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
+
+    }
+
+    public void initList() {
+//        arrayExercise = new ArrayList<>();
+//        arrayExercise.addAll(Arrays.asList(getResources().getStringArray(R.array.exercise)));
+//
+//        adapter = new ArrayAdapter<>(
+//                Search.this,
+//                android.R.layout.simple_list_item_1,
+//                arrayExercise);
+//        lv.setAdapter(adapter);
+        //items = new String[]{text};
+
+        if(text.equals("Exercises")) {
+            items = new String[]{"Bench Press",
+                    "Squats",
+                    "Curls",
+                    "Leg Press",
+                    "Deadlift",
+                    "Leg Curl",
+                    "Hang Clean",
+                    "Snatch",
+                    "Lunge",
+                    "Pull-Up",
+                    "Crunch",
+                    "Shoulder Press",
+                    "Lateral Raise",
+                    "Dips",
+                    "Leg Raise",
+                    "Push Up"};
+        }
+        else if(text.equals("Workouts")) {
+            items = new String[]{"List of workouts here"};
+        }
+        else if(text.equals("Friends")) {
+            items = new String[]{"No Friends :("};
+        }
+        else {
+            items = new String[]{"Error"};
+        }
+
+        arrayExercise=new ArrayList<>(Arrays.asList(items));
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayExercise);
         lv.setAdapter(adapter);
+    }
 
-        //@Override
-        //public boolean onCreateOptionsMenu(Menu menu) {
-        //    MenuInflater inflater = getMenuInflater();
-        //    return super.onCreateOptionsMenu(menu);
-        //}
+    public void searchItem(String textToSearch) {
+        for(String item:items) {
+            if(!item.contains(textToSearch)) {
+                arrayExercise.remove(item);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //do anything to get search result here
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }
