@@ -22,8 +22,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="329dp"
-        android:layout_weight="1.00"
+        android:layout_height="247dp"
         android:background="#3f86b0"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin">
@@ -79,12 +78,71 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:text="Friends List"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:id="@+id/frnd_button" />
+        android:layout_height="400dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="275dp"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="Followers: "
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/followers"/>
+                <TextView
+                    android:text=""
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numFollowers"/>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/followersList"
+                android:layout_width="275dp"
+                android:layout_height="350dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="275dp"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="Following: "
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/following"/>
+                <TextView
+                    android:text=""
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numFollowing"/>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/followingList"
+                android:layout_width="275dp"
+                android:layout_height="350dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--<Button-->
+        <!--android:text="Friends List"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="onClick"-->
+        <!--android:id="@+id/frnd_button" />-->
 
     <Button
         android:text="Calendar"

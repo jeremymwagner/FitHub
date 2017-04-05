@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
 import me.jeremy.fithub.TalkToServer;
@@ -67,72 +68,85 @@ public class Search extends AppCompatActivity {
 
         text = spinner.getSelectedItem().toString();
 
+
+
+
+        lv = (ListView)findViewById(R.id.searchList);
+        et = (EditText)findViewById(R.id.txtsearch);
+
         Button submit = (Button) findViewById(R.id.searchButton);
         submit.setVisibility(Button.VISIBLE);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 text = spinner.getSelectedItem().toString();
+                s = formURL(et.getText().toString(),"Search",text);
                 initList();
+
+                try {
+                    // Add date to param string
+                    s = s.replaceAll("\\s+","+");
+                    Log.d("SEARCHSTRING:",s);
+                    String str = new TalkToServer().execute(s).get();
+
+                    Log.d("RESULT:",str);
+                    JSONObject jObject = new JSONObject(str);
+                    Log.d("JSON:",jObject.toString());
+                    Iterator<?> keys = jObject.keys();
+
+                    while( keys.hasNext() ) {
+                        String key = (String)keys.next();
+                        if ( jObject.get(key) instanceof JSONObject ) {
+                            Log.d("ARRAY:", jObject.get(key).toString());
+                        }
+                    }
+                    ;
+
+
+                    // JSONArray res = new JSONArray(jobj);
+
+
+                    //TextView testReq = (TextView) findViewById(R.id.test);
+
+                    //TextView testReq = (TextView) findViewById(R.id.search);
+
+                    //testReq.setText(str);
+
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
             }
         });
 
-        try {
-            // Add date to param string
-            s = s.replaceAll("\\s+","+");
-            Log.d("SEARCHSTRING:",s);
-            str = new TalkToServer().execute(s).get();
-
-            Log.d("RESULT:",str);
-            JSONObject jobj = new JSONObject(str);
-            //Log.d("SEARCHSTRING:",str);
-
-
-           // JSONArray res = new JSONArray(jobj);
-
-
-            //TextView testReq = (TextView) findViewById(R.id.test);
-
-            //TextView testReq = (TextView) findViewById(R.id.search);
-
-            //testReq.setText(str);
-
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch(JSONException e){
-            e.printStackTrace();
-        }
-
-        lv = (ListView)findViewById(R.id.searchList);
-        //et = (EditText)findViewById(R.id.txtsearch);
-
         initList();
-//        et.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if(charSequence.toString().equals("")) {
-//                    //reset listview
-//                    initList();
-//                }
-//                else {
-//                    //perform search
-//                    searchItem(charSequence.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.toString().equals("")) {
+                    //reset listview
+                    initList();
+                }
+                else {
+                    //perform search
+                    searchItem(charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
@@ -147,7 +161,7 @@ public class Search extends AppCompatActivity {
 //        lv.setAdapter(adapter);
         //items = new String[]{text};
 
-        if(text.equals("Exercises")) {
+        if(text.equals("Exercise")) {
             items = new String[]{"Bench Press",
                     "Squats",
                     "Curls",
@@ -165,10 +179,10 @@ public class Search extends AppCompatActivity {
                     "Leg Raise",
                     "Push Up"};
         }
-        else if(text.equals("Workouts")) {
+        else if(text.equals("Workout")) {
             items = new String[]{"List of workouts here"};
         }
-        else if(text.equals("Friends")) {
+        else if(text.equals("Friend")) {
             items = new String[]{"No Friends :("};
         }
         else {
@@ -182,7 +196,7 @@ public class Search extends AppCompatActivity {
 
     public void searchItem(String textToSearch) {
         for(String item:items) {
-            if(!item.contains(textToSearch)) {
+            if(!item.toLowerCase().contains(textToSearch.toLowerCase())) {
                 arrayExercise.remove(item);
             }
         }

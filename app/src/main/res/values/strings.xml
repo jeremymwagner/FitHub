@@ -57,9 +57,9 @@
     </string-array>
 
     <string-array name="search">
-        <item>Exercises</item>
-        <item>Workouts</item>
-        <item>Friends</item>
+        <item>Exercise</item>
+        <item>Workout</item>
+        <item>Friend</item>
     </string-array>
 
 </resources>

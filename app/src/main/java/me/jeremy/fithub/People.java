@@ -1,12 +1,14 @@
 package me.jeremy.fithub;
 
+import java.util.List;
+
 public class People{
     private int userID;
     private String name;
-    private List<int> followerList;
-    private List<int> followingList;
+    private List<Integer> followerList;
+    private List<Integer> followingList;
 
-    public People(String name, int userID, List<int> followerList, List<int> followingList) {
+    public People(String name, int userID, List<Integer> followerList, List<Integer> followingList) {
         this.name = name;
         this.userID = userID;
         this.followerList = followerList;
@@ -29,19 +31,19 @@ public class People{
         this.userID = userID;
     }
 
-    public List<int> getFollowerList() {
+    public List<Integer> getFollowerList() {
         return followerList;
     }
 
-    public void setFollowerList(List<int> followerList) {
+    public void setFollowerList(List<Integer> followerList) {
         this.followerList = followerList;
     }
 
-    public List<int> getFollowingList() {
+    public List<Integer> getFollowingList() {
         return followingList;
     }
 
-    public void setFollowingList(List<int> followingList) {
+    public void setFollowingList(List<Integer> followingList) {
         this.followingList = followingList;
     }
 }

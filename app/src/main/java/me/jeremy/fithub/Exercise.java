@@ -35,7 +35,7 @@ public class Exercise {
         this.reps = reps;
     }
 
-    public String getDescription(){ return this.description}
+    public String getDescription(){ return this.description;}
 
     public void setDescription(String d){ this.description = d;}
 

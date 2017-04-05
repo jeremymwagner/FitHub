@@ -6,9 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Log;
 import android.app.ProgressDialog;
@@ -28,11 +30,32 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import static me.jeremy.fithub.R.id.imageView;
 
+
+
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+
+    String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
+    String myResult = "";
+    TalkToServer getRequest = new TalkToServer();
+    String s = formURL("LEG PRESS","Search","Exercise");
+
+    //s = formURL("100045858438","getFriends","Following")
+    public String formURL(String userID, String requestType,String friendType){
+        //hard code googleid until figure out how to grab it from sign o
+        return baseURL + "?requestType="+requestType+"&friendType="+friendType +"&userID=" + userID;
+
+    }
+
 
     private GoogleApiClient mGoogleApiClient;
     public Button register;
@@ -45,6 +68,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private GoogleApiClient googleApiClient;
     private static final int REQUEST_CODE = 100;
     Button signOut;
+
+    ArrayAdapter<String> adapter1;
+    ArrayAdapter<String> adapter2;
+    ListView lv1;
+    ListView lv2;
+    ArrayList<String> arrayFollowers;
+    ArrayList<String> arrayFollowing;
+    String[] items1;
+    String[] items2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +169,34 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             //Uri personPhoto = acct.getPhotoUrl();
             name.setText(personName);
             email.setText(personEmail);
+
+            try {
+                // Add date to param string
+                s = s.replaceAll("\\s+","+");
+                Log.d("SEARCHSTRING:",s);
+                String str = new TalkToServer().execute(s).get();
+
+                JSONObject jobj = new JSONObject(str);
+
+
+                // JSONArray res = new JSONArray(jobj);
+
+
+                //TextView testReq = (TextView) findViewById(R.id.test);
+
+                //TextView testReq = (TextView) findViewById(R.id.search);
+
+                //testReq.setText(str);
+
+
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch(JSONException e){
+                e.printStackTrace();
+            }
             //pic.setImageURI(personPhoto);
             /*String personPhoto = acct.getPhotoUrl().toString();
 
@@ -165,9 +225,31 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             signOut = (Button) findViewById(R.id.sign_out_button);
             signOut.setOnClickListener(this);
+
+            lv1 = (ListView)findViewById(R.id.followersList);//
+            lv2 = (ListView)findViewById(R.id.followingList);//
+
+            initList();//
         }
     }
 
+    public void initList() {
+        items1 = new String[]{"Joe", "Bob", "Jessica", "Frank", "Rachel", "Patrick", "Sandy", "Cloud", "Janrae", "Jeremy", "Nicki"};
+        arrayFollowers = new ArrayList<>(Arrays.asList(items1));
+        adapter1 = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowers);
+        lv1.setAdapter(adapter1);
+        String numFollowers = Integer.toString(items1.length);
+        TextView followers = (TextView) findViewById(R.id.numFollowers);
+        followers.setText(numFollowers);
+
+        items2 = new String[]{"Bob", "Jessica", "Quinn", "Frank", "Rachel", "Dillon", "Sandy", "Cloud", "Jeremy", "Nicki", "Roger", "Dom", "Annie", "Rob", "Sam", "Alex", "Meg"};
+        arrayFollowing = new ArrayList<>(Arrays.asList(items2));
+        adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowing);
+        lv2.setAdapter(adapter2);
+        String numFollowing = Integer.toString(items2.length);
+        TextView following = (TextView) findViewById(R.id.numFollowing);
+        following.setText(numFollowing);
+    }
 
     // [END onActivityResult]
 

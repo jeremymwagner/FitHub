@@ -1,5 +1,7 @@
 package me.jeremy.fithub;
 
+import java.util.List;
+
 public class Workout{
     private String name;
     private String description;

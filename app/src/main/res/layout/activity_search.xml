@@ -26,11 +26,11 @@
             android:layout_height="51dp"
             android:id="@+id/searchTitle" />
 
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/txtsearch"-->
-            <!--android:hint="Search"/>-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/txtsearch"
+            android:hint="Search"/>
 
         <LinearLayout
             android:orientation="horizontal"
