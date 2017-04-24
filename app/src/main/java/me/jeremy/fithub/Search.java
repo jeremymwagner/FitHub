@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import me.jeremy.fithub.TalkToServer;
@@ -48,12 +49,20 @@ public class Search extends AppCompatActivity {
 
     }
 
+    public String workoutformURL(String wName, String requestType,String searchType){
+        //hard code googleid until figure out how to grab it from sign o
+        return baseURL + "?requestType="+requestType+"&workoutName="+wName +"&searchType=" + searchType;
+
+    }
+
     ArrayAdapter<String> adapter;
-    ListView lv;
+    ListView lv ;
     EditText et;
     ArrayList<String> arrayExercise;
+    ArrayList<Workout> wList = new ArrayList<Workout>();
     String[] items;
     String text;
+    ArrayList<Exercise> eList= new ArrayList<Exercise>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,51 +88,139 @@ public class Search extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 text = spinner.getSelectedItem().toString();
-                s = formURL(et.getText().toString(),"Search",text);
-                initList();
+                if(text.equals("Exercise")) {
+                    s = formURL(et.getText().toString(), "Search", text);
+                    initList();
 
-                try {
-                    // Add date to param string
-                    s = s.replaceAll("\\s+","+");
-                    Log.d("SEARCHSTRING:",s);
-                    String str = new TalkToServer().execute(s).get();
+                    try {
+                        // Add date to param string
+                        s = s.replaceAll("\\s+", "+");
+                        Log.d("SEARCHSTRING:", s);
+                        String str = new TalkToServer().execute(s).get();
 
-                    Log.d("RESULT:",str);
-                    JSONObject jObject = new JSONObject(str);
-                    Log.d("JSON:",jObject.toString());
-                    Iterator<?> keys = jObject.keys();
+                        Log.d("RESULT:", str);
+                        JSONObject jObject = new JSONObject(str);
+                        Log.d("JSON:", jObject.toString());
+                        Iterator<?> keys = jObject.keys();
 
-                    while( keys.hasNext() ) {
-                        String key = (String)keys.next();
-                        if ( jObject.get(key) instanceof JSONObject ) {
-                            Log.d("ARRAY:", jObject.get(key).toString());
+
+                        while (keys.hasNext()) {
+                            String key = (String) keys.next();
+                            if (jObject.get(key) instanceof JSONObject) {
+                                Log.d("ARRAY:", jObject.get(key).toString());
+                                JSONObject exercise = new JSONObject(jObject.get(key).toString());
+                                Log.d("EXER:", exercise.toString());
+                                Iterator<?> ekeys = exercise.keys();
+                                String ekey = (String) ekeys.next();
+                                String val = exercise.get(ekey).toString();
+                                JSONObject eval = new JSONObject(val);
+                                Log.d("VAL:", val);
+
+
+                                Exercise e = new Exercise(eval.get("EXERCISE_NAME").toString(), eval.get("EXERCISE_HOW").toString(), eval.get("EXERCISE_MGROUP").toString());
+                                eList.add(e);
+                                Log.d("LIST:", eList.get(0).getDescription());
+
+                            }
                         }
+
+                        ;
+
+
+                        // JSONArray res = new JSONArray(jobj);
+
+
+                        //TextView testReq = (TextView) findViewById(R.id.test);
+
+                        //TextView testReq = (TextView) findViewById(R.id.search);
+
+                        //testReq.setText(str);
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    ;
+                }
+
+                if(text.equals("Workout")) {
+                    s = workoutformURL(et.getText().toString(), "Search", text);
+                    initList();
+
+                    try {
+                        // Add date to param string
+                        s = s.replaceAll("\\s+", "+");
+                        Log.d("SEARCHSTRING:", s);
+                        String str = new TalkToServer().execute(s).get();
+
+                        Log.d("RESULT:", str);
+                        JSONObject jObject = new JSONObject(str);
+                        Log.d("JSON:", jObject.toString());
+                        Iterator<?> keys = jObject.keys();
 
 
-                    // JSONArray res = new JSONArray(jobj);
+                        while (keys.hasNext()) {
+                            String key = (String) keys.next();
+                            Workout w = new Workout();
+                            w.setWID(Integer.parseInt(key));
+                            if (jObject.get(key) instanceof JSONObject) {
+                                Log.d("ARRAY:", jObject.get(key).toString());
+                                JSONObject workout = new JSONObject(jObject.get(key).toString());
+                                Log.d("EXER:", workout.toString());
+                                Iterator<?> ekeys = workout.keys();
+                                String ekey = (String) ekeys.next();
 
 
-                    //TextView testReq = (TextView) findViewById(R.id.test);
+                                String wName = workout.get(ekey).toString();
+                                ArrayList<ExerciseByID> eidlist = new ArrayList<ExerciseByID>();
+                                String author = "";
+                                while(ekeys.hasNext()) {
+                                    String a = (String) ekeys.next();
+                                    Log.d("EID", a);
+                                    int b = Integer.parseInt(a);
+                                    ExerciseByID neid = new ExerciseByID(b);
+                                    if(workout.get(a) instanceof JSONObject){
+                                        JSONObject eval = new JSONObject(workout.get(a).toString());
+                                        Log.d("VAL:", eval.toString());
+                                        //w.setAuthor(eval.get("W_NAME").toString());
+                                        int s = Integer.valueOf(eval.get("W_SETS").toString());
+                                        int r = Integer.valueOf(eval.get("W_REPS").toString());
+                                        author = eval.get("W_AUTHOR").toString();
 
-                    //TextView testReq = (TextView) findViewById(R.id.search);
+                                        neid.setSets(s);
+                                        neid.setReps(r);
+                                        eidlist.add(neid);
+                                    }
+                                }
 
-                    //testReq.setText(str);
+                                w.setExerciseList(eidlist);
+                                w.setAuthor(author);
+                                w.setName(wName);
+                                Log.d("WNAME", w.getName());
+
+                                wList.add(w);
+                            }
+                        }
+
+                        ;
 
 
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch(JSONException e){
-                    e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
 
         initList();
+        /*
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -146,7 +243,7 @@ public class Search extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
     }
 
@@ -178,9 +275,14 @@ public class Search extends AppCompatActivity {
                     "Dips",
                     "Leg Raise",
                     "Push Up"};
+
+            ExerciseAdapter adapter = new ExerciseAdapter(this, eList);
+            lv.setAdapter(adapter);
         }
         else if(text.equals("Workout")) {
             items = new String[]{"List of workouts here"};
+            WorkoutAdapter wadapter = new WorkoutAdapter(this,wList);
+            lv.setAdapter(wadapter);
         }
         else if(text.equals("Friend")) {
             items = new String[]{"No Friends :("};
@@ -189,9 +291,9 @@ public class Search extends AppCompatActivity {
             items = new String[]{"Error"};
         }
 
-        arrayExercise=new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayExercise);
-        lv.setAdapter(adapter);
+
+       // ExerciseAdapter adapter = new ExerciseAdapter(this, eList);
+        //lv.setAdapter(adapter);
     }
 
     public void searchItem(String textToSearch) {
@@ -224,4 +326,6 @@ public class Search extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+
 }

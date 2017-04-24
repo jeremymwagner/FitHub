@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
     String myResult = "";
     TalkToServer getRequest = new TalkToServer();
-    String s = formURL("LEG PRESS","Search","Exercise");
+    String s = formURL("000000","Search","Exercise");
 
     //s = formURL("100045858438","getFriends","Following")
     public String formURL(String userID, String requestType,String friendType){
@@ -169,7 +169,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             //Uri personPhoto = acct.getPhotoUrl();
             name.setText(personName);
             email.setText(personEmail);
-
+/*
             try {
                 // Add date to param string
                 s = s.replaceAll("\\s+","+");
@@ -197,6 +197,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             } catch(JSONException e){
                 e.printStackTrace();
             }
+            */
             //pic.setImageURI(personPhoto);
             /*String personPhoto = acct.getPhotoUrl().toString();
 
@@ -236,7 +237,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     public void initList() {
         items1 = new String[]{"Joe", "Bob", "Jessica", "Frank", "Rachel", "Patrick", "Sandy", "Cloud", "Janrae", "Jeremy", "Nicki"};
         arrayFollowers = new ArrayList<>(Arrays.asList(items1));
-        adapter1 = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowers);
+        adapter1 = new ArrayAdapter<String>(this, R.layout.list_item2, R.id.txtitem, arrayFollowers);
         lv1.setAdapter(adapter1);
         String numFollowers = Integer.toString(items1.length);
         TextView followers = (TextView) findViewById(R.id.numFollowers);
@@ -244,7 +245,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         items2 = new String[]{"Bob", "Jessica", "Quinn", "Frank", "Rachel", "Dillon", "Sandy", "Cloud", "Jeremy", "Nicki", "Roger", "Dom", "Annie", "Rob", "Sam", "Alex", "Meg"};
         arrayFollowing = new ArrayList<>(Arrays.asList(items2));
-        adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowing);
+        adapter2 = new ArrayAdapter<String>(this, R.layout.list_item2, R.id.txtitem, arrayFollowing);
         lv2.setAdapter(adapter2);
         String numFollowing = Integer.toString(items2.length);
         TextView following = (TextView) findViewById(R.id.numFollowing);

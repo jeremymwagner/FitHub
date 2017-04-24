@@ -19,6 +19,15 @@ public class Exercise {
         this.reps = r;
     }
 
+    public Exercise(String n, String d, String m){
+        this.name = n;
+        this.description = d;
+        this.muscleGroup = m;
+        this.sets=0;
+        this.reps=0;
+    }
+
+
     public int getSets(){
         return this.sets;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -27,15 +27,15 @@
             android:id="@+id/searchTitle" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="561dp"
+            android:layout_height="wrap_content"
             android:id="@+id/txtsearch"
             android:hint="Search"/>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="570dp"
+            android:layout_height="58dp">
 
             <Spinner
                 android:id="@+id/searchSpinner"
@@ -48,10 +48,19 @@
                 android:layout_height="wrap_content"
                 android:text="Search" />
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/searchList"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="727dp" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/searchList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

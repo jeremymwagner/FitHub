@@ -74,37 +74,37 @@ public class Calendar extends AppCompatActivity {
 
                 String str = "test";
 
-                try {
-
-                    // Add date to param string
-                    str = new TalkToServer().execute(s).get();
-                    JSONObject jobj = new JSONObject(str);
-
-                    JSONObject w1 = jobj.getJSONObject("1");
-                    JSONObject e1 = w1.getJSONObject("1");
-                    String s1 = e1.getString("W_SETS");
-                    String r1 = e1.getString("W_REPS");
-                    String a1 = e1.getString("W_AUTHOR");
-                    JSONObject e2 = w1.getJSONObject("2");
-                    String s2 = e1.getString("W_SETS");
-                    String r2 = e1.getString("W_REPS");
-
-                    TextView workoutName = (TextView) findViewById(R.id.workout);
-                    workoutName.setText(a1);
-
-                    TextView exer1 = (TextView) findViewById(R.id.exer_1);
-                    exer1.setText("Exercise: Pull-Ups" + "      Sets: " + s1 + "    Reps: " + r1);
-
-                    TextView exer2 = (TextView) findViewById(R.id.exer_2);
-                    exer2.setText("\nExercise: Curls" + "      Sets: " + s2 + "    Reps: " + r2);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch(JSONException e){
-                    e.printStackTrace();
-                }
+//                try {
+//
+//                    // Add date to param string
+//                    str = new TalkToServer().execute(s).get();
+//                    JSONObject jobj = new JSONObject(str);
+//
+//                    JSONObject w1 = jobj.getJSONObject("1");
+//                    JSONObject e1 = w1.getJSONObject("1");
+//                    String s1 = e1.getString("W_SETS");
+//                    String r1 = e1.getString("W_REPS");
+//                    String a1 = e1.getString("W_AUTHOR");
+//                    JSONObject e2 = w1.getJSONObject("2");
+//                    String s2 = e1.getString("W_SETS");
+//                    String r2 = e1.getString("W_REPS");
+//
+//                    TextView workoutName = (TextView) findViewById(R.id.workout);
+//                    workoutName.setText(a1);
+//
+//                    TextView exer1 = (TextView) findViewById(R.id.exer_1);
+//                    exer1.setText("Exercise: Pull-Ups" + "      Sets: " + s1 + "    Reps: " + r1);
+//
+//                    TextView exer2 = (TextView) findViewById(R.id.exer_2);
+//                    exer2.setText("\nExercise: Curls" + "      Sets: " + s2 + "    Reps: " + r2);
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                } catch(JSONException e){
+//                    e.printStackTrace();
+//                }
 
 
 

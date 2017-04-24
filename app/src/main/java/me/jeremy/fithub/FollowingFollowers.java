@@ -100,7 +100,7 @@ public class FollowingFollowers extends AppCompatActivity {
 
 
         arrayFollowers=new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowers);
+        //adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayFollowers);
         lv.setAdapter(adapter);
     }
 
