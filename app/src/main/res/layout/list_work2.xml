@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="311dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/wName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+
+                 />
+
+            <TextView
+                android:id="@+id/wAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+                 />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addToCal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#80CBC4"
+            android:layout_margin="15dp"
+            android:text="Add to Calendar" />
+    </LinearLayout>
+</RelativeLayout>

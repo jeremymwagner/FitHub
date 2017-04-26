@@ -24,12 +24,12 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         Workout w = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_work2, parent, false);
         }
         // Lookup view for data population
-        TextView tvName = (TextView) convertView.findViewById(R.id.eName);
-        TextView tvDesc = (TextView) convertView.findViewById(R.id.eDesc);
-        TextView tvGroup = (TextView) convertView.findViewById(R.id.eGroup);
+        TextView tvName = (TextView) convertView.findViewById(R.id.wName);
+        TextView tvDesc = (TextView) convertView.findViewById(R.id.wAuthor);
+        //TextView tvGroup = (TextView) convertView.findViewById(R.id.eGroup);
         // Populate the data into the template view using the data object
         tvName.setText("Workout: " + w.getName());
         tvDesc.setText("Author: " + w.getAuthor());

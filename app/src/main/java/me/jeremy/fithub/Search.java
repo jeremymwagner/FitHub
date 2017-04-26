@@ -55,6 +55,12 @@ public class Search extends AppCompatActivity {
 
     }
 
+    public String peopleformURL(String userID, String requestType,String friendType){
+        //hard code googleid until figure out how to grab it from sign o
+        return baseURL + "?requestType="+requestType+"&userID="+userID +"&friendType=" + friendType;
+
+    }
+
     ArrayAdapter<String> adapter;
     ListView lv ;
     EditText et;
@@ -88,6 +94,13 @@ public class Search extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 text = spinner.getSelectedItem().toString();
+                eList= new ArrayList<Exercise>();
+                wList = new ArrayList<Workout>();
+
+                
+                //
+                // Handling of JSON strings into objects
+                //
                 if(text.equals("Exercise")) {
                     s = formURL(et.getText().toString(), "Search", text);
                     initList();
@@ -126,15 +139,6 @@ public class Search extends AppCompatActivity {
 
                         ;
 
-
-                        // JSONArray res = new JSONArray(jobj);
-
-
-                        //TextView testReq = (TextView) findViewById(R.id.test);
-
-                        //TextView testReq = (TextView) findViewById(R.id.search);
-
-                        //testReq.setText(str);
 
 
                     } catch (InterruptedException e) {
@@ -259,22 +263,7 @@ public class Search extends AppCompatActivity {
         //items = new String[]{text};
 
         if(text.equals("Exercise")) {
-            items = new String[]{"Bench Press",
-                    "Squats",
-                    "Curls",
-                    "Leg Press",
-                    "Deadlift",
-                    "Leg Curl",
-                    "Hang Clean",
-                    "Snatch",
-                    "Lunge",
-                    "Pull-Up",
-                    "Crunch",
-                    "Shoulder Press",
-                    "Lateral Raise",
-                    "Dips",
-                    "Leg Raise",
-                    "Push Up"};
+
 
             ExerciseAdapter adapter = new ExerciseAdapter(this, eList);
             lv.setAdapter(adapter);

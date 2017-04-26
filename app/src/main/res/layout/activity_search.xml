@@ -30,6 +30,8 @@
             android:layout_width="561dp"
             android:layout_height="wrap_content"
             android:id="@+id/txtsearch"
+            android:background="@android:color/white"
+            android:layout_margin="10dp"
             android:hint="Search"/>
 
         <LinearLayout
@@ -40,7 +42,9 @@
             <Spinner
                 android:id="@+id/searchSpinner"
                 android:layout_width="489dp"
-                android:layout_height="43dp" />
+                android:layout_height="43dp"
+
+                />
 
             <Button
                 android:id="@+id/searchButton"
@@ -59,7 +63,10 @@
                 <ListView
                     android:id="@+id/searchList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="15px"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
