@@ -24,13 +24,13 @@
         <item>Hang Clean</item>
         <item>Snatch</item>
         <item>Lunge</item>
-        <item>Pull-Up</item>
+        <item>Pull Up</item>
         <item>Crunch</item>
         <item>Shoulder Press</item>
         <item>Lateral Raise</item>
         <item>Dips</item>
         <item>Leg Raise</item>
-        <item>Push Up</item>
+        <item>Push Ups</item>
     </string-array>
 
     <string-array name="num">

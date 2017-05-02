@@ -97,7 +97,7 @@ public class Search extends AppCompatActivity {
                 eList= new ArrayList<Exercise>();
                 wList = new ArrayList<Workout>();
 
-                
+
                 //
                 // Handling of JSON strings into objects
                 //
@@ -164,7 +164,6 @@ public class Search extends AppCompatActivity {
                         JSONObject jObject = new JSONObject(str);
                         Log.d("JSON:", jObject.toString());
                         Iterator<?> keys = jObject.keys();
-
 
                         while (keys.hasNext()) {
                             String key = (String) keys.next();

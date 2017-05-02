@@ -41,7 +41,6 @@ import java.util.concurrent.ExecutionException;
 import static me.jeremy.fithub.R.id.imageView;
 
 
-
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     String baseURL = "https://people.eecs.ku.edu/~jbondoc/test2.php";
@@ -77,6 +76,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     ArrayList<String> arrayFollowing;
     String[] items1;
     String[] items2;
+    public static String user;
+    public static String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,19 +167,22 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             String personEmail = acct.getEmail();
             String personId = acct.getId();
 
+            user = personName;
+            uid = personId;
             //Uri personPhoto = acct.getPhotoUrl();
             name.setText(personName);
             email.setText(personEmail);
-/*
+
             try {
                 // Add date to param string
+                s = formURL(uid,"getFriends","Followers");
                 s = s.replaceAll("\\s+","+");
                 Log.d("SEARCHSTRING:",s);
                 String str = new TalkToServer().execute(s).get();
+                Log.d("s",str);
+               JSONObject jobj = new JSONObject(str);
 
-                JSONObject jobj = new JSONObject(str);
-
-
+               Log.d("OBJ",jobj.toString());
                 // JSONArray res = new JSONArray(jobj);
 
 
@@ -197,7 +201,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             } catch(JSONException e){
                 e.printStackTrace();
             }
-            */
+
             //pic.setImageURI(personPhoto);
             /*String personPhoto = acct.getPhotoUrl().toString();
 
@@ -352,4 +356,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
+    public static String getUser(){
+        return user;
+    }
+
 }
+

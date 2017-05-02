@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 
 public class createWorkout extends AppCompatActivity {
 
@@ -36,10 +38,10 @@ public class createWorkout extends AppCompatActivity {
     //String s = formURL("000005","Search","LEG PRESS","9","3","Joe Schmoe");
     List<Exercise> postExer;
 
-    public String formURL(String wID, String requestType,String eName,String nReps,String nSets,String wAuthor,String wName){
+    public String formURL(String wID, String requestType,String eName,String nReps,String nSets,String wAuthor,String wName,String date){
 
         return baseURL + "?requestType="+requestType+"&workoutID="+wID +"&exerciseName="
-                + eName+"&W_REPS="+nReps+"&W_SETS="+nSets+"&W_AUTHOR="+wAuthor+"&GOOGLE_ID=333"+"&W_NAME="+wName;
+                + eName+"&W_REPS="+nReps+"&W_SETS="+nSets+"&W_AUTHOR="+wAuthor+"&GOOGLE_ID="+Login.uid+"&W_NAME="+wName + "&W_DATE=" + date;
 
     }
     // https://people.eecs.ku.edu/~jbondoc/test2.php?requestType=Post&workoutID=000005&exerciseName1=LEG_PRESS&W_REPS1=9&W_SETS1=3&W_AUTHOR=Joe_Schmoe&googleID=333
@@ -100,9 +102,6 @@ public class createWorkout extends AppCompatActivity {
                 String text1 = spinner1.getSelectedItem().toString();
                 String text2 = spinner2.getSelectedItem().toString();
                 String text3 = spinner3.getSelectedItem().toString();
-                TextView test1 = (TextView) findViewById(R.id.test1);
-                TextView test2 = (TextView) findViewById(R.id.test2);
-                TextView test3 = (TextView) findViewById(R.id.test3);
                 //test1.setText(text1);
                 //test2.setText(text2);
                 //test3.setText(text3);
@@ -110,9 +109,6 @@ public class createWorkout extends AppCompatActivity {
                 String text4 = spinner4.getSelectedItem().toString();
                 String text8 = spinner8.getSelectedItem().toString();
                 String text12 = spinner12.getSelectedItem().toString();
-                TextView test4 = (TextView) findViewById(R.id.test1);
-                TextView test8 = (TextView) findViewById(R.id.test2);
-                TextView test12 = (TextView) findViewById(R.id.test3);
                 //test1.setText(text4);
                 //test2.setText(text8);
                 //test3.setText(text12);
@@ -120,9 +116,6 @@ public class createWorkout extends AppCompatActivity {
                 String text5 = spinner5.getSelectedItem().toString();
                 String text9 = spinner9.getSelectedItem().toString();
                 String text13 = spinner13.getSelectedItem().toString();
-                TextView test5 = (TextView) findViewById(R.id.test1);
-                TextView test9 = (TextView) findViewById(R.id.test2);
-                TextView test13 = (TextView) findViewById(R.id.test3);
                 //test1.setText(text5);
                 //test2.setText(text9);
                 //test3.setText(text13);
@@ -130,9 +123,6 @@ public class createWorkout extends AppCompatActivity {
                 String text6 = spinner6.getSelectedItem().toString();
                 String text10 = spinner10.getSelectedItem().toString();
                 String text14 = spinner14.getSelectedItem().toString();
-                TextView test6 = (TextView) findViewById(R.id.test1);
-                TextView test10 = (TextView) findViewById(R.id.test2);
-                TextView test14 = (TextView) findViewById(R.id.test3);
                 //test1.setText(text6);
                 //test2.setText(text10);
                 //test3.setText(text14);
@@ -140,14 +130,10 @@ public class createWorkout extends AppCompatActivity {
                 String text7 = spinner7.getSelectedItem().toString();
                 String text11 = spinner11.getSelectedItem().toString();
                 String text15 = spinner15.getSelectedItem().toString();
-                TextView test7 = (TextView) findViewById(R.id.test1);
-                TextView test11 = (TextView) findViewById(R.id.test2);
-                TextView test15 = (TextView) findViewById(R.id.test3);
-                test1.setText(text7);
-                test2.setText(text11);
-                test3.setText(text15);
 
+                String wid = "000009";
 
+                String wauthor = Login.user;
 
                 String str;
                 try {
@@ -156,35 +142,35 @@ public class createWorkout extends AppCompatActivity {
 
 
                     text1 = text1.toUpperCase();
-                    str = formURL("000008","Post",text1,text2,text3,"My App",nameOfWorkout);
+                    str = formURL(wid,"Post",text1,text2,text3,wauthor,nameOfWorkout,Calendar.wDate);
                     str = str.replaceAll("\\s+","+");
                     Log.d("SEARCHSTRING:",str);
                     String res = new TalkToServer().execute(str).get();
 
                     text4 = text4.toUpperCase();
-                    str = formURL("000008","Post",text4,text8,text12,"My App",nameOfWorkout);
+                    str = formURL(wid,"Post",text4,text8,text12,wauthor,nameOfWorkout,Calendar.wDate);
                     str = str.replaceAll("\\s+","+");
                     Log.d("SEARCHSTRING:",str);
                     res = new TalkToServer().execute(str).get();
 
                     text5 = text5.toUpperCase();
-                    str = formURL("000008","Post",text5,text9,text13,"My App",nameOfWorkout);
+                    str = formURL(wid,"Post",text5,text9,text13,wauthor,nameOfWorkout,Calendar.wDate);
                     str = str.replaceAll("\\s+","+");
                     Log.d("SEARCHSTRING:",str);
                     res = new TalkToServer().execute(str).get();
 
                     text6 = text6.toUpperCase();
-                    str = formURL("000008","Post",text6,text10,text14,"My App",nameOfWorkout);
+                    str = formURL(wid,"Post",text6,text10,text14,wauthor,nameOfWorkout,Calendar.wDate);
                     str = str.replaceAll("\\s+","+");
                     Log.d("SEARCHSTRING:",str);
                     res = new TalkToServer().execute(str).get();
 
                     text7 = text7.toUpperCase();
-                    str = formURL("000008","Post",text7,text11,text15,"My App",nameOfWorkout);
+                    str = formURL(wid,"Post",text7,text11,text15,wauthor,nameOfWorkout,Calendar.wDate);
                     str = str.replaceAll("\\s+","+");
                     Log.d("SEARCHSTRING:",str);
                     res = new TalkToServer().execute(str).get();
-                   // TextView testReq = (TextView) findViewById(R.id.test);
+                    //TextView testReq = (TextView) findViewById(R.id.test);
                     //TextView testReq = (TextView) findViewById(R.id.search);
 
                     //testReq.setText(str);
